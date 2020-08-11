@@ -71,6 +71,17 @@ def proportion_string(o):
         proportions.append(f"{k}: {round((o[k]['count']/total)*100, 2)}%")
     return " " + (summary + ", ".join(proportions))
 
+def indent_sql(query):
+    indent = 0
+    lines = query.split("\n")
+    for idx, line in enumerate(lines):
+        lines[idx] = (" " * indent) + line
+        if len(line) >= 1:
+            if line[-1] == "(":
+                indent += 4
+            elif line[-1] == ")":
+                indent -= 4
+    return "\n".join(lines)
 
 def translate(o):
     tables = list(o.keys())
@@ -89,7 +100,8 @@ def translate(o):
                 columns[index] = f"{column[1]}\n{column[0]}"
             else:
                 columns[index] = column[0]
-        b = BASE.format(table=tablename, columns=",\n".join(columns))
-        syntax = Syntax(b, "sql")
+        sql_query = BASE.format(table=tablename, columns=",\n".join(columns))
+        sql_query = indent_sql(sql_query)
+        syntax = Syntax(sql_query, "sql")
         rich.print(syntax)
         rich.print()
