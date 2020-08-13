@@ -4,6 +4,7 @@ import json
 import pymongo
 import rich
 from rich.columns import Columns
+from rich.syntax import Syntax
 
 import re
 
@@ -22,8 +23,13 @@ def extract_parser(subargs):
 
 
 def translate_parser(subargs):
-    parser = subargs.add_parser("translate")
-    parser.add_argument("-i", "--infile")
+    parser = subargs.add_parser(
+        "translate",
+        help="Translate a MongoDB schema definition to a CrateDB table schema",
+    )
+    parser.add_argument(
+        "-i", "--infile", help="The JSON file to read the MongoDB schema from"
+    )
 
 
 def full_parser(subargs):
@@ -36,7 +42,7 @@ def full_parser(subargs):
 
 
 def get_args():
-    parser = argparse.ArgumentParser(add_help=False)
+    parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="command")
     extract_parser(subparsers)
     translate_parser(subparsers)
@@ -102,7 +108,7 @@ def gather_collections(database):
         if i not in collections_to_ignore:
             filtered_collections.append(c)
 
-        return filtered_collections
+    return filtered_collections
 
 
 def extract(args):
@@ -149,7 +155,12 @@ def translate(schema):
     rich.print(
         "\n[green bold]MongoDB[/green bold] -> [blue bold]CrateDB[/blue bold] Exporter :: Schema Extractor\n\n"
     )
-    translate_schema(schema)
+    sql_queries = translate_schema(schema)
+    for collection, query in sql_queries.items():
+        syntax = Syntax(query, "sql")
+        rich.print(f"Collection [blue bold]'{collection}'[/blue bold]:")
+        rich.print(syntax)
+        rich.print()
 
 
 def translate_from_file(args):

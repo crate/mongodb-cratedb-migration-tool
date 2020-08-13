@@ -28,7 +28,9 @@ class TestTranslate(unittest.TestCase):
             },
         }
         expected_type = "TEXT"
-        expected_comment = " -- ⬇️ Types: STRING: 33.33%, INTEGER: 33.33%, BOOLEAN: 33.33%"
+        expected_comment = (
+            " -- ⬇️ Types: STRING: 33.33%, INTEGER: 33.33%, BOOLEAN: 33.33%"
+        )
         (o_type, o_comment) = translate.determine_type(i)
         self.assertEqual(o_type, expected_type)
         self.assertEqual(o_comment, expected_comment)
@@ -42,9 +44,9 @@ class TestTranslate(unittest.TestCase):
             }
         }
         o = translate.translate_object(i)
-        self.assertEqual(" ".join(o.split()), 'OBJECT (STRICT) AS ( "a" TEXT )')
+        self.assertEqual(" ".join(o.split()), 'OBJECT (DYNAMIC) AS ( "a" TEXT )')
 
     def test_array_translate(self):
-        i = {"count": 1, "subtypes": {"STRING": {"count": 1}}}
+        i = {"count": 1, "types": {"STRING": {"count": 1}}}
         o = translate.translate_array(i)
         self.assertEqual("ARRAY(TEXT)", o)

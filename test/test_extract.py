@@ -45,7 +45,7 @@ class TestExtractTypes(unittest.TestCase):
 
         subtypes = extract.extract_schema_from_array(i["b"], {})
         self.assertListEqual(["ARRAY"], list(subtypes.keys()))
-        self.assertListEqual(["INTEGER"], list(subtypes["ARRAY"]["subtypes"].keys()))
+        self.assertListEqual(["INTEGER"], list(subtypes["ARRAY"]["types"].keys()))
 
         subtypes = extract.extract_schema_from_array(i["c"], {})
         self.assertListEqual(["OBJECT"], list(subtypes.keys()))
