@@ -76,6 +76,7 @@ def extract_to_file(args):
         json.dump(schema, out, indent=4)
     rich.print("[green bold]Done![/green bold]")
 
+
 def gather_collections(database):
     """ Gather a list of collections to use from a MongoDB database, based
     on user input.
@@ -101,11 +102,7 @@ def gather_collections(database):
         if i not in collections_to_ignore:
             filtered_collections.append(c)
 
-    if filtered_collections == []:
-        rich.print("\nExcluding all collections. Nothing to do.")
-        exit(0)
-
-    return filtered_collections
+        return filtered_collections
 
 
 def extract(args):
@@ -123,6 +120,10 @@ def extract(args):
     client = pymongo.MongoClient(args.host, int(args.port))
     db = client[args.database]
     filtered_collections = gather_collections(db)
+
+    if filtered_collections == []:
+        rich.print("\nExcluding all collections. Nothing to do.")
+        exit(0)
 
     rich.print("\nDo a [red bold]full[/red bold] collection scan?")
     rich.print(
