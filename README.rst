@@ -147,6 +147,23 @@ To do schema extraction and translation in one command, use the `full` subcomman
 
     $ migr8 full --host localhost --port 27017 --database test_db
 
+
+Export MongoDB Collection
+-------------------------
+
+To export a MongoDB collection to a JSON stream, use the `extract` subcommand::
+
+    $ migr8 export --host localhost --port 27017 --database test_db --collection test
+
+This will convert the collection's records into JSON and output the JSON to stdout.
+This can be piped in different ways. For example, to a file::
+
+    $ migr8 export --host localhost --port 27017 --database test_db --collection test > test.json
+
+Or to export the collection into CrateDB using `cr8`_::
+
+    $ migr8 export --host localhost -- port -- database test_db --collection test | cr8 insert-json --hosts localhost:4200 --table test
+
 Test
 ----
 
@@ -170,3 +187,4 @@ To create a standalone executable of the tool, use `shiv`_::
     $ shiv -p python --site-packages .venv/lib/python3.8/site-packages --compressed -o migr8 -e crate.migr8.__main__:main
 
 .. _shiv: https://github.com/linkedin/shiv
+.. _cr8: https://github.com/mfussenegger/cr8

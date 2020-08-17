@@ -31,6 +31,9 @@ import re
 
 from .extract import extract_schema_from_collection
 from .translate import translate as translate_schema
+from .export import export
+
+from bson.raw_bson import RawBSONDocument
 
 
 def extract_parser(subargs):
@@ -61,6 +64,14 @@ def translate_parser(subargs):
     )
 
 
+def export_parser(subargs):
+    parser = subargs.add_parser("export")
+    parser.add_argument("--collection", required=True)
+    parser.add_argument("--host", default="localhost", help="MongoDB host")
+    parser.add_argument("--port", default=27017, help="MongoDB port")
+    parser.add_argument("--database", required=True, help="MongoDB database")
+
+
 def full_parser(subargs):
     parser = subargs.add_parser(
         "full", help="Extract and translate a schema from MongoDB to CrateDB"
@@ -75,6 +86,7 @@ def get_args():
     subparsers = parser.add_subparsers(dest="command")
     extract_parser(subparsers)
     translate_parser(subparsers)
+    export_parser(subparsers)
     full_parser(subparsers)
     return parser.parse_args()
 
@@ -164,7 +176,7 @@ def extract(args):
         exit(0)
 
     if args.scan:
-        partial = args.scan == 'partial'
+        partial = args.scan == "partial"
     else:
         rich.print("\nDo a [red bold]full[/red bold] collection scan?")
         rich.print(
@@ -207,12 +219,22 @@ def translate_from_file(args):
         translate(schema)
 
 
+def export_to_stdout(args):
+    client = pymongo.MongoClient(
+        args.host, int(args.port), document_class=RawBSONDocument
+    )
+    db = client[args.database]
+    export(db[args.collection])
+
+
 def main():
     args = get_args()
     if args.command == "extract":
         extract_to_file(args)
     elif args.command == "translate":
         translate_from_file(args)
+    elif args.command == "export":
+        export_to_stdout(args)
     elif args.command == "full":
         schema = extract(args)
         translate(schema)
