@@ -1,4 +1,4 @@
-from rip import translate
+from crate.migr8 import translate
 
 import unittest
 

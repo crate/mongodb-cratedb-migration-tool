@@ -1,4 +1,4 @@
-from rip import extract
+from crate.migr8 import extract
 import bson
 
 import unittest

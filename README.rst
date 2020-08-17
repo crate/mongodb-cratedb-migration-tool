@@ -25,7 +25,7 @@ Schema Extraction
 To extract a description of the schema of a collection, you can use the `extract`
 subcommand. For example::
 
-    $ rip extract --host localhost --port 27017 --database test_db
+    $ migr8 extract --host localhost --port 27017 --database test_db
 
 This will connect to the MongoDB instance for the host:port. It will then look
 at the collections within that database, and ask you which collections to
@@ -117,7 +117,7 @@ Translate Schema
 Once a schema description has been extracted, this can be translated into a
 CrateDB schema definition using the `translate` subcommand::
 
-    $ rip translate -i mongodb_schema.json
+    $ migr8 translate -i mongodb_schema.json
 
 This will attempt to translate the description into a best-fit CrateDB table
 definition. Where datatypes are ambigious, it will *choose the most common
@@ -140,7 +140,7 @@ Extract and Translate Schema
 
 To do schema extraction and translation in one command, use the `full` subcommand::
 
-    $ rip full --host localhost --port 27017 --database test_db
+    $ migr8 full --host localhost --port 27017 --database test_db
 
 Test
 ----

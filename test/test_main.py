@@ -1,4 +1,4 @@
-from rip.__main__ import parse_input_numbers
+from crate.migr8.__main__ import parse_input_numbers
 
 import unittest
 
