@@ -5,8 +5,8 @@ Changes for MongoDB -> CrateDB Migration Tool
 Unreleased
 ==========
 
-0.1.0
-=====
+17/08/2020 0.1.0
+================
 
 - Added mode to iterate over a MongoDB collection and build up a descriptive
   schema of that collection.
