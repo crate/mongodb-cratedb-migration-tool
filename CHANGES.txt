@@ -5,6 +5,9 @@ Changes for MongoDB -> CrateDB Migration Tool
 Unreleased
 ==========
 
+0.1.0
+=====
+
 - Added mode to iterate over a MongoDB collection and build up a descriptive
   schema of that collection.
 - Added mode to translate a MongoDB schema description to a CrateDB CREATE TABLE

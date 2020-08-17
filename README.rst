@@ -12,7 +12,12 @@ and typed data.
 Installation
 ------------
 
-To install::
+To use the standalone tool, run the executable::
+
+    $ chmod +x migr8
+    $ ./migr8
+
+To install the project from source::
 
     $ python -m venv .venv
     $ source .venv/bin/activate
@@ -148,3 +153,20 @@ Test
 To run the tests::
 
     $ python -m unittest
+
+Release
+-------
+
+To release the tool, first update the version in ``crate/migr8/__init__.py``
+and create a new section for that release in ``CHANGES.txt``.
+
+Then create a new tag using the ``devtools/create_tag.sh`` script. Build the
+tool via::
+
+    $ python setup.py sdist bdist_wheel
+
+To create a standalone executable of the tool, use `shiv`_::
+
+    $ shiv -p python --site-packages dist --compressed -o migr8 -e crate.migr8.__main__:main
+
+.. _shiv: https://github.com/linkedin/shiv
