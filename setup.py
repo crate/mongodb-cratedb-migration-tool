@@ -33,7 +33,12 @@ setup(
     packages=["crate.migr8"],
     namespace_packages=["crate"],
     entry_points={"console_scripts": ["migr8 = crate.migr8.__main__:main"]},
-    install_requires=["pymongo==3.10.1", "rich==3.3.2",],
+    install_requires=[
+        "pymongo==3.10.1",
+        "rich==3.3.2",
+        "orjson==3.3.1",
+        "python-bsonjs=0.2.0",
+    ],
     extras_require={
         "testing": ["black==18.9b0", "flake8==3.7.7", "mypy==0.670", "isort==4.3.15"]
     },
