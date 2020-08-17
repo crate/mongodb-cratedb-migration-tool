@@ -167,6 +167,6 @@ tool via::
 
 To create a standalone executable of the tool, use `shiv`_::
 
-    $ shiv -p python --site-packages dist --compressed -o migr8 -e crate.migr8.__main__:main
+    $ shiv -p python --site-packages .venv/lib/python3.8/site-packages --compressed -o migr8 -e crate.migr8.__main__:main
 
 .. _shiv: https://github.com/linkedin/shiv
