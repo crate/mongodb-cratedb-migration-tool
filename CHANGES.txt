@@ -5,6 +5,9 @@ Changes for MongoDB -> CrateDB Migration Tool
 Unreleased
 ==========
 
+- Added optional parameters to specify which collection and scan method to use
+  for schema extraction.
+
 17/08/2020 0.1.0
 ================
 

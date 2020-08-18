@@ -40,6 +40,14 @@ def extract_parser(subargs):
     parser.add_argument("--host", default="localhost", help="MongoDB host")
     parser.add_argument("--port", default=27017, help="MongoDB port")
     parser.add_argument("--database", required=True, help="MongoDB database")
+    parser.add_argument(
+        "--collection", help="MongoDB collection to create a schema for"
+    )
+    parser.add_argument(
+        "--scan",
+        choices=["full", "partial"],
+        help="Whether to fully scan the MongoDB collections or only partially.",
+    )
     parser.add_argument("-o", "--out", default="mongodb_schema.json")
 
 
@@ -146,23 +154,30 @@ def extract(args):
 
     client = pymongo.MongoClient(args.host, int(args.port))
     db = client[args.database]
-    filtered_collections = gather_collections(db)
+    if args.collection:
+        filtered_collections = [args.collection]
+    else:
+        filtered_collections = gather_collections(db)
 
     if filtered_collections == []:
         rich.print("\nExcluding all collections. Nothing to do.")
         exit(0)
 
-    rich.print("\nDo a [red bold]full[/red bold] collection scan?")
-    rich.print(
-        "A full scan will iterate over all documents in the collection, a partial only one document. (Y/n)"
-    )
-    full = input(">  ").strip().lower()
+    if args.scan:
+        partial = args.scan == 'partial'
+    else:
+        rich.print("\nDo a [red bold]full[/red bold] collection scan?")
+        rich.print(
+            "A full scan will iterate over all documents in the collection, a partial only one document. (Y/n)"
+        )
+        full = input(">  ").strip().lower()
 
-    partial = full != "y"
+        partial = full != "y"
 
-    rich.print(
-        f"\nExecuting a [red bold]{'partial' if partial else 'full'}[/red bold] scan..."
-    )
+        rich.print(
+            f"\nExecuting a [red bold]{'partial' if partial else 'full'}[/red bold] scan..."
+        )
+
     schemas = {}
     for collection in filtered_collections:
         schemas[collection] = extract_schema_from_collection(db[collection], partial)
