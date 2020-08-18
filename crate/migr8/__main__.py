@@ -72,22 +72,12 @@ def export_parser(subargs):
     parser.add_argument("--database", required=True, help="MongoDB database")
 
 
-def full_parser(subargs):
-    parser = subargs.add_parser(
-        "full", help="Extract and translate a schema from MongoDB to CrateDB"
-    )
-    parser.add_argument("--host", default="localhost", help="MongoDB host")
-    parser.add_argument("--port", default=27017, help="MongoDB port")
-    parser.add_argument("--database", required=True, help="MongoDB database")
-
-
 def get_args():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="command")
     extract_parser(subparsers)
     translate_parser(subparsers)
     export_parser(subparsers)
-    full_parser(subparsers)
     return parser.parse_args()
 
 
@@ -235,9 +225,6 @@ def main():
         translate_from_file(args)
     elif args.command == "export":
         export_to_stdout(args)
-    elif args.command == "full":
-        schema = extract(args)
-        translate(schema)
 
 
 if __name__ == "__main__":

@@ -140,14 +140,6 @@ datatype*. For example, the above example would result in::
     );
 
 
-Extract and Translate Schema
-----------------------------
-
-To do schema extraction and translation in one command, use the `full` subcommand::
-
-    $ migr8 full --host localhost --port 27017 --database test_db
-
-
 Export MongoDB Collection
 -------------------------
 
