@@ -102,3 +102,6 @@ ENV/
 
 # sphinx stuff
 seonu/_build/
+
+# PyCharm
+.idea
