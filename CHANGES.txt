@@ -5,6 +5,8 @@ Changes for MongoDB -> CrateDB Migration Tool
 Unreleased
 ==========
 
+- Fix installation by adjusting dependencies
+
 01/09/2020 0.2.0
 ================
 
