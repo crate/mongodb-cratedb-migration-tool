@@ -152,7 +152,7 @@ This can be piped in different ways. For example, to a file::
 
 Or to export the collection into CrateDB using `cr8`_::
 
-    migr8 export --host localhost -- port -- database test_db --collection test | \
+    migr8 export --host localhost --port 27017 --database test_db --collection test | \
         cr8 insert-json --hosts localhost:4200 --table test
 
 Development Sandbox
