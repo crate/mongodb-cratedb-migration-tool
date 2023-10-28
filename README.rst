@@ -166,6 +166,10 @@ Acquire sources, and install package in development mode::
     source .venv/bin/activate
     pip install --editable='.[testing]'
 
+Start a sandbox instance of MongoDB in another terminal::
+
+    docker run -it --rm --publish=27017:27017 mongo:5
+
 Run the software tests::
 
     python -m unittest -vvv
