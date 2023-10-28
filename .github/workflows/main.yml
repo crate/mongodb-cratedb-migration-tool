@@ -24,7 +24,7 @@ jobs:
       matrix:
         os: ["ubuntu-latest"]
         python-version: ["3.11"]
-        mongodb-version: ["2", "3", "4"]
+        mongodb-version: ["2", "3", "4", "5", "6", "7"]
 
     # Run auxiliary services. Works for all runner OS, because it is independent.
     # https://docs.github.com/en/actions/using-containerized-services/about-service-containers

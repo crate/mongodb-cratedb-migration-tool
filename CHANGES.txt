@@ -6,7 +6,7 @@ Unreleased
 ==========
 
 - Fix installation by adjusting dependencies
-- CI: Add support for MongoDB 2-4
+- Add support for MongoDB 2 to 7
 - MongoDB API: ``include_system_collections`` became an unknown BSON field
 - Update to pymongo 4
 
