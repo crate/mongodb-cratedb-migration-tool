@@ -67,7 +67,7 @@ class TestMongoDBIntegration(unittest.TestCase):
         )
         cls.db = cls.client.get_database(cls.DBNAME)
         try:
-            cls.db.last_status()
+            cls.client.server_info()
         except pymongo.errors.ServerSelectionTimeoutError:
             if cls.SKIP_IF_NOT_RUNNING:
                 raise cls.skipTest(cls, reason="MongoDB server not running")
