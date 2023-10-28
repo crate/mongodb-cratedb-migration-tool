@@ -9,11 +9,18 @@ to determine a best-fit table definition for that schema.
 As such, this means the tool works best on collections of similarly structured
 and typed data.
 
+Supported MongoDB versions
+--------------------------
+
 The application supports the following versions of MongoDB.
 
 .. image:: https://img.shields.io/badge/MongoDB-2.x%20--%204.x-blue.svg
     :target: https://github.com/mongodb/mongo
     :alt: Supported MongoDB versions
+
+If you need support for MongoDB 2.x, you will need to downgrade the ``pymongo``
+client driver library to version 3, like ``pip install 'pymongo<4'`.
+
 
 Installation
 ------------
