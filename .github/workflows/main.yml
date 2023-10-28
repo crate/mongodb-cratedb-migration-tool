@@ -58,6 +58,11 @@ jobs:
         # Install package in editable mode.
         pip install --use-pep517 --prefer-binary --editable='.[testing]'
 
+    - name: Downgrade pymongo on MongoDB 2
+      if: matrix.mongodb-version == '2'
+      run: |
+        pip install 'pymongo<4'
+
     - name: Run linter and software tests
       run: |
         python -m unittest -vvv
