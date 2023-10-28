@@ -6,6 +6,7 @@ Unreleased
 ==========
 
 - Fix installation by adjusting dependencies
+- CI: Add support for MongoDB 2-4
 
 01/09/2020 0.2.0
 ================
