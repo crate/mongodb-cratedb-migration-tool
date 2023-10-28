@@ -119,7 +119,7 @@ def gather_collections(database):
     on user input.
     """
 
-    collections = database.list_collection_names(include_system_collections=False)
+    collections = database.list_collection_names()
 
     tbl = rich.table.Table(show_header=True, header_style="bold blue")
     tbl.add_column("Id", width=3)
@@ -140,8 +140,7 @@ def gather_collections(database):
             filtered_collections.append(c)
 
     # MongoDB 2 does not understand `include_system_collections=False`.
-    if "system.indexes" in filtered_collections:
-        filtered_collections.remove("system.indexes")
+    filtered_collections = [item for item in filtered_collections if not item.startswith("system.")]
 
     return filtered_collections
 
