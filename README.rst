@@ -1,5 +1,5 @@
-MongoDB → CrateDB Schema Extractor
-==================================
+MongoDB → CrateDB Migration Tool
+================================
 
 This tool iterates over a MongoDB collection (or series of collections) and
 iteratively builds up a description of the schema of that collection. This
@@ -8,6 +8,12 @@ to determine a best-fit table definition for that schema.
 
 As such, this means the tool works best on collections of similarly structured
 and typed data.
+
+The application supports the following versions of MongoDB.
+
+.. image:: https://img.shields.io/badge/MongoDB-2.x%20--%204.x-blue.svg
+    :target: https://github.com/mongodb/mongo
+    :alt: Supported MongoDB versions
 
 Installation
 ------------
@@ -168,7 +174,7 @@ Acquire sources, and install package in development mode::
 
 Start a sandbox instance of MongoDB in another terminal::
 
-    docker run -it --rm --publish=27017:27017 mongo:5
+    docker run -it --rm --publish=27017:27017 mongo:4
 
 Run the software tests::
 

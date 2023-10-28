@@ -48,9 +48,6 @@ class TestMongoDBIntegration(unittest.TestCase):
 
     # MongoDB 4
     docker run -it --rm --publish=27017:27017 mongo:4
-
-    # MongoDB 5
-    docker run -it --rm --publish=27017:27017 mongo:5
     """
 
     HOST = "localhost"

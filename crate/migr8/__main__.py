@@ -139,6 +139,10 @@ def gather_collections(database):
         if i not in collections_to_ignore:
             filtered_collections.append(c)
 
+    # MongoDB 2 does not understand `include_system_collections=False`.
+    if "system.indexes" in filtered_collections:
+        filtered_collections.remove("system.indexes")
+
     return filtered_collections
 
 
