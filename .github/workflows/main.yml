@@ -24,12 +24,22 @@ jobs:
       matrix:
         os: ["ubuntu-latest"]
         python-version: ["3.11"]
+        mongodb-version: ["4","5"]
+
+    # Run auxiliary services. Works for all runner OS, because it is independent.
+    # https://docs.github.com/en/actions/using-containerized-services/about-service-containers
+    services:
+
+      mongodb:
+        image: mongo:${{ matrix.mongodb-version }}
+        ports:
+          - 27017:27017
 
     env:
       OS: ${{ matrix.os }}
       PYTHON: ${{ matrix.python-version }}
 
-    name: Python ${{ matrix.python-version }} on OS ${{ matrix.os }}
+    name: Python ${{ matrix.python-version }}, MongoDB ${{ matrix.mongodb-version }} on OS ${{ matrix.os }}
     steps:
 
     - name: Acquire sources
