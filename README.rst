@@ -14,7 +14,7 @@ Supported MongoDB versions
 
 The application supports the following versions of MongoDB.
 
-.. image:: https://img.shields.io/badge/MongoDB-2.x%20--%204.x-blue.svg
+.. image:: https://img.shields.io/badge/MongoDB-2.x%20--%207.x-blue.svg
     :target: https://github.com/mongodb/mongo
     :alt: Supported MongoDB versions
 
@@ -181,7 +181,11 @@ Acquire sources, and install package in development mode::
 
 Start a sandbox instance of MongoDB in another terminal::
 
+    # MongoDB 4
     docker run -it --rm --publish=27017:27017 mongo:4
+
+    # MongoDB 7
+    docker run -it --rm --publish=27017:27017 mongo:7
 
 Run the software tests::
 
