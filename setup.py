@@ -43,7 +43,7 @@ setup(
         "testing": [
             "black==18.9b0",
             "flake8==6.1.0",
-            "isort==4.3.15",
+            "isort==5.12.0",
         ]
     },
     python_requires=">=3.6",
