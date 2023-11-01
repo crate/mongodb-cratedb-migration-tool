@@ -35,7 +35,7 @@ setup(
     entry_points={"console_scripts": ["migr8 = crate.migr8.__main__:main"]},
     install_requires=[
         "pymongo>=3.10.1,<5",
-        "rich>=3.3.2,<4",
+        "rich>=3.3.2,<14",
         "orjson>=3.3.1,<4",
         "python-bsonjs>=0.2,<0.5",
     ],
