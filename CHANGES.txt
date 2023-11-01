@@ -5,6 +5,9 @@ Changes for MongoDB -> CrateDB Migration Tool
 Unreleased
 ==========
 
+01/11/2023 0.3.0
+================
+
 - Fix installation by adjusting dependencies
 - Add support for MongoDB 2 to 7
 - MongoDB API: ``include_system_collections`` became an unknown BSON field
