@@ -197,16 +197,30 @@ Release
 To release the tool, first update the version in ``crate/migr8/__init__.py``
 and create a new section for that release in ``CHANGES.txt``.
 
-Then create a new tag using the ``devtools/create_tag.sh`` script. Build the
-tool via::
+Then create a new tag using the ``devtools/create_tag.sh`` script. After that,
+build distribution packages.
 
-    python setup.py sdist bdist_wheel
+::
 
-To create a standalone executable of the tool, use `shiv`_::
+    pip install build
+    python -m build
 
+To create a standalone executable of the tool, use `shiv`_. Make sure to invoke
+those commands within a virgin virtualenv, to keep the footprint of the embedded
+libraries low.
+
+::
+
+    pip install --editable=.
+    pip install shiv
     shiv -p python \
-        --site-packages .venv/lib/python3.8/site-packages \
-        --compressed -o migr8 -e crate.migr8.__main__:main
+        --site-packages .venv/lib/python3.11/site-packages \
+        --compressed -o dist/migr8 -e crate.migr8.__main__:main
 
-.. _shiv: https://github.com/linkedin/shiv
+After you've produced the artefacts, upload them to the corresponding `GitHub
+release page`_.
+
+
 .. _cr8: https://github.com/mfussenegger/cr8
+.. _shiv: https://github.com/linkedin/shiv
+.. _GitHub release page: https://github.com/crate/mongodb-cratedb-migration-tool/releases
