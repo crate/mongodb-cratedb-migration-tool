@@ -37,7 +37,7 @@ setup(
         "pymongo>=3.10.1,<5",
         "rich>=3.3.2,<4",
         "orjson>=3.3.1,<4",
-        "python-bsonjs>=0.2,<0.3",
+        "python-bsonjs>=0.2,<0.4",
     ],
     extras_require={
         "testing": [
