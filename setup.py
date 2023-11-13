@@ -41,7 +41,7 @@ setup(
     ],
     extras_require={
         "testing": [
-            "black==23.10.1",
+            "black==23.11.0",
             "flake8==6.1.0",
             "isort==5.12.0",
         ]
