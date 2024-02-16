@@ -19,7 +19,7 @@ The application supports the following versions of MongoDB.
     :alt: Supported MongoDB versions
 
 If you need support for MongoDB 2.x, you will need to downgrade the ``pymongo``
-client driver library to version 3, like ``pip install 'pymongo<4'`.
+client driver library to version 3, like ``pip install 'pymongo<4'``.
 
 
 Installation
