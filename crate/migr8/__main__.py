@@ -82,7 +82,7 @@ def get_args():
 
 
 def parse_input_numbers(s: str):
-    """ Parse an input string for numbers and ranges.
+    """Parse an input string for numbers and ranges.
 
     Supports strings like '0 1 2', '0, 1, 2' as well as ranges such as
     '0-2'.
@@ -103,7 +103,7 @@ def parse_input_numbers(s: str):
 
 
 def extract_to_file(args):
-    """ Extract a schema (or set of schemas) from MongoDB collections to a
+    """Extract a schema (or set of schemas) from MongoDB collections to a
     a JSON file.
     """
 
@@ -115,7 +115,7 @@ def extract_to_file(args):
 
 
 def gather_collections(database):
-    """ Gather a list of collections to use from a MongoDB database, based
+    """Gather a list of collections to use from a MongoDB database, based
     on user input.
     """
 
@@ -140,13 +140,15 @@ def gather_collections(database):
             filtered_collections.append(c)
 
     # MongoDB 2 does not understand `include_system_collections=False`.
-    filtered_collections = [item for item in filtered_collections if not item.startswith("system.")]
+    filtered_collections = [
+        item for item in filtered_collections if not item.startswith("system.")
+    ]
 
     return filtered_collections
 
 
 def extract(args):
-    """ Extract schemas from MongoDB collections.
+    """Extract schemas from MongoDB collections.
 
     This asks the user for which collections they would like to extract,
     iterates over these collections and returns a dictionary of schemas for
@@ -205,7 +207,7 @@ def translate(schema):
 
 
 def translate_from_file(args):
-    """ Reads in a JSON file and extracts the schema from it."""
+    """Reads in a JSON file and extracts the schema from it."""
 
     with open(args.infile) as f:
         schema = json.load(f)

@@ -55,7 +55,7 @@ OBJECT = "OBJECT ({object_type}) AS (\n{definition}\n)"
 
 
 def translate_object(schema):
-    """ Translates an object field schema definition into a CrateDB dynamic
+    """Translates an object field schema definition into a CrateDB dynamic
     object column.
     """
 
@@ -70,13 +70,13 @@ def translate_object(schema):
         else:
             columns[index] = column[0]
     return OBJECT.format(
-        object_type=object_type, definition=",\n".join([c for c in columns]),
+        object_type=object_type,
+        definition=",\n".join([c for c in columns]),
     )
 
 
 def translate_array(schema):
-    """ Translates an array field schema definition into a CrateDB array column.
-    """
+    """Translates an array field schema definition into a CrateDB array column."""
 
     subtype, comment = determine_type(schema)
     if comment:
@@ -86,8 +86,7 @@ def translate_array(schema):
 
 
 def determine_type(schema):
-    """ Determine the type of a specific field schema.
-    """
+    """Determine the type of a specific field schema."""
 
     types = schema.get("types", [])
     type = max(types, key=lambda item: types[item]["count"])
@@ -105,7 +104,7 @@ def determine_type(schema):
 
 
 def proportion_string(types: list) -> str:
-    """ Converts a list of types into a string explaining the proportions of
+    """Converts a list of types into a string explaining the proportions of
     each type.
     """
 
@@ -118,8 +117,7 @@ def proportion_string(types: list) -> str:
 
 
 def indent_sql(query: str) -> str:
-    """ Indents an SQL query based on opening and closing brackets.
-    """
+    """Indents an SQL query based on opening and closing brackets."""
 
     indent = 0
     lines = query.split("\n")
@@ -134,7 +132,7 @@ def indent_sql(query: str) -> str:
 
 
 def translate(schemas):
-    """ Translate a schema definition for a set of MongoDB collection schemas.
+    """Translate a schema definition for a set of MongoDB collection schemas.
 
     This results in a set of CrateDB compatible CREATE TABLE expressions
     corresponding to the set of MongoDB collection schemas.
