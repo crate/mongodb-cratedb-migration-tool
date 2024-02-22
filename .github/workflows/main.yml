@@ -15,9 +15,17 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
+  lint:
+    name: Run black/pylint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run black
+        uses: psf/black@stable
 
   tests:
-
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -63,6 +71,6 @@ jobs:
       run: |
         pip install 'pymongo<4'
 
-    - name: Run linter and software tests
+    - name: Run software tests
       run: |
         python -m unittest -vvv
