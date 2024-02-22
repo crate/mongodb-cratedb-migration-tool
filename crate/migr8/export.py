@@ -92,8 +92,8 @@ def convert(d):
 
 
 def export(collection):
-    """ Exports a MongoDB collection's documents to standard JSON and then
-        outputs it to stdout.
+    """Exports a MongoDB collection's documents to standard JSON and then
+    outputs it to stdout.
     """
     for document in collection.find():
         bson_json = bsonjs.dumps(document.raw)

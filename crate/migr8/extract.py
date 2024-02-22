@@ -77,7 +77,7 @@ progress = progress.Progress(
 
 
 def extract_schema_from_collection(collection: Collection, partial: bool):
-    """ Extracts a schema definition from a collection.
+    """Extracts a schema definition from a collection.
 
     If the extraction is partial, only the first document in the collection is
     used to create the schema.
@@ -105,8 +105,7 @@ def extract_schema_from_collection(collection: Collection, partial: bool):
 
 
 def extract_schema_from_document(document: dict, schema: dict):
-    """ Extracts and updates schema definition from a given document.
-    """
+    """Extracts and updates schema definition from a given document."""
 
     for k, v in document.items():
         if k not in schema:
@@ -135,8 +134,7 @@ def extract_schema_from_document(document: dict, schema: dict):
 
 
 def extract_schema_from_array(array: list, schema: dict):
-    """ Extracts and updates a schema definition for a list.
-    """
+    """Extracts and updates a schema definition for a list."""
 
     for item in array:
         t = get_type(item)
