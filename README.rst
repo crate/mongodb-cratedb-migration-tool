@@ -1,5 +1,39 @@
+**The code in this repository has been integrated into the** `CrateDB Toolkit`_.
+Please find migration instructions below.
+
+
 MongoDB → CrateDB Migration Tool
 ================================
+
+Migration Notice
+----------------
+
+Please switch over by invoking::
+
+    pip uninstall migr8
+    pip install 'cratedb-toolkit[mongodb]'
+
+CrateDB Toolkit provides the same `migr8`_ command-line interface as before,
+and an additional `ctk load table`_ one-shot command-line interface. It works
+like this::
+
+    ctk load table \
+      --cratedb-sqlalchemy-url crate://crate@localhost:4200/testdrive/demo \
+      mongodb://localhost:27017/testdrive/demo
+
+In order to run the commands without installation, or on cloud environments,
+you can now also use an OCI image, for example with Podman or Docker::
+
+    alias ctk="docker run -it --rm --network=host ghcr.io/crate-workbench/cratedb-toolkit ctk"
+    alias migr8="docker run -it --rm --network=host ghcr.io/crate-workbench/cratedb-toolkit migr8"
+
+To verify that works well, run::
+
+    ctk load table --help
+    migr8 --help
+
+About
+-----
 
 This tool iterates over a MongoDB collection (or series of collections) and
 iteratively builds up a description of the schema of that collection. This
@@ -222,5 +256,8 @@ release page`_.
 
 
 .. _cr8: https://github.com/mfussenegger/cr8
-.. _shiv: https://github.com/linkedin/shiv
+.. _CrateDB Toolkit: https://github.com/crate-workbench/cratedb-toolkit
+.. _ctk load table: https://github.com/crate-workbench/cratedb-toolkit/tree/main/cratedb_toolkit/io#mongodb
 .. _GitHub release page: https://github.com/crate/mongodb-cratedb-migration-tool/releases
+.. _migr8: https://github.com/crate-workbench/cratedb-toolkit/tree/main/cratedb_toolkit/io/mongodb#readme
+.. _shiv: https://github.com/linkedin/shiv
